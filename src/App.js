@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Contact from "./components/Contact";
 import Header from "./components/Header";
+import Contacts from "./components/Contacts";
 //import "./App.css";
 class App extends Component {
   render() {
@@ -8,12 +8,7 @@ class App extends Component {
       <div className="App">
         <Header branding="Contact Manager" />
         <div className="container">
-          {" "}
-          <Contact
-            name="Nicholas Roman"
-            email="Nick@gmail.com"
-            phone="888-999-9999"
-          />
+          <Contacts />
         </div>
       </div>
     );
