@@ -10,19 +10,13 @@ const reducer = (state, action) => {
           contact => contact.id !== action.payload
         )
       };
-      break;
-      //   case "ADD_CONTACT":
-      //   return {
-      //     ...state.contacts,
-      //     {
-      //         id: 1,
-      //         name: "John Doe",
-      //         email: "jdoe@gmail.com",
-      //         phone: "555-555-5555"
-      //       }
-      //   };
-      //   break;
-      defalut: return state;
+    case "ADD_CONTACT":
+      return {
+        ...state,
+        contacts: [action.payload, ...state.contacts]
+      };
+    default:
+      return state;
   }
 };
 
