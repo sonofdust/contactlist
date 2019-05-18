@@ -5,7 +5,7 @@ import uuid from "uuid";
 class AddContact extends Component {
   state = { name: "", email: "", phone: "", errors: {} };
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.tnpmarget.name]: e.target.value });
   };
 
   onSubmit = (dispatch, e) => {
