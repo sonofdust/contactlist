@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import { Consumer } from "../../context";
 import TextinputGroup from "../layout/TextinputGroup";
 import uuid from "uuid";
+import axios from "axios";
+
 class AddContact extends Component {
   state = { name: "", email: "", phone: "", errors: {} };
   onChange = e => {
-    this.setState({ [e.tnpmarget.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = (dispatch, e) => {
     e.preventDefault();
     const { name, email, phone } = this.state;
+    const newContact = { name, email, phone };
     if (name.trim() === "") {
       this.setState({ errors: { name: "Name is required." } });
       return;
@@ -24,11 +27,26 @@ class AddContact extends Component {
       return;
     }
 
-    dispatch({
-      type: "ADD_CONTACT",
-      payload: { id: uuid(), name, email, phone }
-    });
-    this.setState({ name: "", email: "", phone: "", errors: {} });
+    axios
+      .post("https://jsonplaceholder.typicode.com/users", newContact)
+      .then(res => {
+        dispatch({
+          type: "ADD_CONTACT",
+          payload: { id: uuid(), name, email, phone }
+        });
+        this.setState({ name: "", email: "", phone: "", errors: {} });
+        this.props.history.push("/");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // dispatch({
+    //   type: "ADD_CONTACT",
+    //   payload: { name, email, phone }
+    // });
+
+    // this.setState({ name: "", email: "", phone: "", errors: {} });
+    // this.props.history.push("/");
   };
 
   render() {
